@@ -1,4 +1,6 @@
-package com.leetcode;
+package com.leetcode.no1_100;
+
+import com.leetcode.ListNode;
 
 import java.util.*;
 

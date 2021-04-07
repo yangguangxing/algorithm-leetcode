@@ -16,7 +16,7 @@ public class ListNode {
         return node.next;
     }
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 

@@ -1,4 +1,6 @@
-package com.leetcode;
+package com.leetcode.no1_100;
+
+import com.leetcode.ListNode;
 
 import java.util.*;
 
@@ -8,13 +10,10 @@ import java.util.*;
 public class Solution11_20 {
 
     /**
-     * 11. 盛最多水的容器
-     * https://leetcode-cn.com/problems/container-with-most-water/
+     * 11. 盛最多水的容器 https://leetcode-cn.com/problems/container-with-most-water/
      *
      * @param height
-     * @return maxArea
-     * [1, 8, 6, 2, 5, 4, 8, 3, 7]
-     * 49
+     * @return maxArea [1, 8, 6, 2, 5, 4, 8, 3, 7] 49
      */
     public int maxArea(int[] height) {
         int left = 0, right = height.length - 1, max = 0;
@@ -29,7 +28,6 @@ public class Solution11_20 {
         }
         return max;
     }
-
 
     static Map<Integer, String> numMap = new HashMap<>();
 
@@ -50,24 +48,22 @@ public class Solution11_20 {
     }
 
     /**
-     * 12. 整数转罗马数字
-     * https://leetcode-cn.com/problems/integer-to-roman/
-     * 自己方案
+     * 12. 整数转罗马数字 https://leetcode-cn.com/problems/integer-to-roman/ 自己方案
      *
      * @param num
      * @return
      */
     public String intToRoman2(int num) {
-        //k当前最后一位的原大小
+        // k当前最后一位的原大小
         int k = 1, temp = num, mod = 0;
         String result = "";
         while (temp > 0) {
             mod = temp % 10;
             int c = mod > 5 ? mod - 5 : mod;
-            //从map中获取数字对应的字符串
+            // 从map中获取数字对应的字符串
             String s = numMap.get(mod * k);
             if (s == null) {
-                //mod为2，3或者6，7，8
+                // mod为2，3或者6，7，8
                 for (int i = 1; i < c + 1; i++) {
                     result = numMap.get(k) + result;
                 }
@@ -77,20 +73,18 @@ public class Solution11_20 {
             } else {
                 result = s + result;
             }
-            //下一位
+            // 下一位
             temp /= 10;
             k *= 10;
         }
         return result;
     }
 
-    static int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-    static String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    static int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+    static String[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
     /**
-     * 12. 整数转罗马数字
-     * https://leetcode-cn.com/problems/integer-to-roman/
-     * 参考方案
+     * 12. 整数转罗马数字 https://leetcode-cn.com/problems/integer-to-roman/ 参考方案
      *
      * @param num
      * @return
@@ -107,11 +101,9 @@ public class Solution11_20 {
     }
 
     /**
-     * 13. 罗马数字转整数
-     * https://leetcode-cn.com/problems/roman-to-integer/
-     * I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
-     * X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。
-     * C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+     * 13. 罗马数字转整数 https://leetcode-cn.com/problems/roman-to-integer/ I 可以放在 V (5) 和
+     * X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500)
+     * 和 M (1000) 的左边，来表示 400 和 900。
      *
      * @param s
      * @return
@@ -131,8 +123,7 @@ public class Solution11_20 {
     }
 
     /**
-     * 14. 最长公共前缀
-     * https://leetcode-cn.com/problems/longest-common-prefix/
+     * 14. 最长公共前缀 https://leetcode-cn.com/problems/longest-common-prefix/
      *
      * @param strs
      * @return
@@ -142,8 +133,8 @@ public class Solution11_20 {
             return "";
         }
         String result = strs[0];
-        //先比较第一个和第二个字符，取出这两个字符的公共字符
-        //然后用公共字符往后匹配
+        // 先比较第一个和第二个字符，取出这两个字符的公共字符
+        // 然后用公共字符往后匹配
         for (int i = 1; i < strs.length; i++) {
             result = stringPrefix(result, strs[i]);
             if (result.isEmpty()) {
@@ -156,7 +147,7 @@ public class Solution11_20 {
     private String stringPrefix(String s1, String s2) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s1.length(); i++) {
-            //超过s2长度或者字符不匹配，那么返回
+            // 超过s2长度或者字符不匹配，那么返回
             if (i >= s2.length() || s1.charAt(i) != s2.charAt(i)) {
                 break;
             }
@@ -166,8 +157,7 @@ public class Solution11_20 {
     }
 
     /**
-     * 15. 三数之和
-     * https://leetcode-cn.com/problems/3sum/
+     * 15. 三数之和 https://leetcode-cn.com/problems/3sum/
      *
      * @param nums
      * @return
@@ -177,12 +167,12 @@ public class Solution11_20 {
         if (nums == null || nums.length < 3) {
             return result;
         }
-        //排序
+        // 排序
         Arrays.sort(nums);
         if (nums[0] > 0 || nums[nums.length - 1] < 0) {
             return result;
         }
-        //双指针j,k，外部两次循环
+        // 双指针j,k，外部两次循环
         for (int i = 0; i < nums.length; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
@@ -207,8 +197,7 @@ public class Solution11_20 {
     }
 
     /**
-     * 15. 三数之和
-     * https://leetcode-cn.com/problems/3sum/
+     * 15. 三数之和 https://leetcode-cn.com/problems/3sum/
      *
      * @param nums
      * @return
@@ -219,37 +208,37 @@ public class Solution11_20 {
         if (nums == null || length < 3) {
             return result;
         }
-        //排序
+        // 排序
         Arrays.sort(nums);
         if (nums[0] > 0 || nums[length - 1] < 0) {
             return result;
         }
-        //双指针left,right
+        // 双指针left,right
         for (int i = 0; i < length; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
-                //跳过已经处理的数字
+                // 跳过已经处理的数字
                 continue;
             }
             int left = i + 1, right = length - 1;
-            //确保right在右侧，不会重复处理数据
+            // 确保right在右侧，不会重复处理数据
             while (left < right) {
                 if (left > i + 1 && nums[left] == nums[left - 1]) {
-                    //跳过已经处理的数字
+                    // 跳过已经处理的数字
                     left++;
                     continue;
                 }
                 if (nums[i] + nums[left] > 0) {
-                    //nums[right]必然大于0，所以退出循环
+                    // nums[right]必然大于0，所以退出循环
                     break;
                 }
                 int sum = nums[i] + nums[left] + nums[right];
                 if (sum > 0) {
-                    //和大了，那么right往右移，变小
+                    // 和大了，那么right往右移，变小
                     right--;
                 } else if (sum < 0) {
                     left++;
                 } else {
-                    //符合要求，那么同时左右移，防止重复
+                    // 符合要求，那么同时左右移，防止重复
                     result.add(Arrays.asList(nums[i], nums[left], nums[right]));
                     left++;
                     right--;
@@ -260,11 +249,8 @@ public class Solution11_20 {
     }
 
     /**
-     * 16. 最接近的三数之和
-     * https://leetcode-cn.com/problems/3sum-closest/
-     * 输入：nums = [-1,2,1,-4], target = 1
-     * 输出：2
-     * 解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
+     * 16. 最接近的三数之和 https://leetcode-cn.com/problems/3sum-closest/ 输入：nums =
+     * [-1,2,1,-4], target = 1 输出：2 解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
      *
      * @param nums
      * @param target
@@ -295,7 +281,6 @@ public class Solution11_20 {
         return result;
     }
 
-
     Map<Character, String> map = new HashMap<>();
 
     {
@@ -322,12 +307,12 @@ public class Solution11_20 {
             return result;
         }
 
-        //取出第一个字符串的所有字符
+        // 取出第一个字符串的所有字符
         String s = map.get(digits.charAt(0));
         for (int i = 0; i < s.length(); i++) {
             result.add(s.charAt(i) + "");
         }
-        //两两操作
+        // 两两操作
         for (int i = 1; i < digits.length(); i++) {
             result = strCombination2(result, map.get(digits.charAt(i)));
         }
@@ -344,7 +329,7 @@ public class Solution11_20 {
         return ss;
     }
 
-    String[] phoneLetters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    String[] phoneLetters = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
     List<String> result = new ArrayList<>();
     StringBuilder sb = new StringBuilder();
 
@@ -371,11 +356,8 @@ public class Solution11_20 {
         }
     }
 
-
     /**
-     * 18. 四数之和
-     * https://leetcode-cn.com/problems/4sum/
-     * 答案中不可以包含重复的四元组。
+     * 18. 四数之和 https://leetcode-cn.com/problems/4sum/ 答案中不可以包含重复的四元组。
      *
      * @param nums
      * @param target
@@ -386,17 +368,17 @@ public class Solution11_20 {
         if (nums == null || nums.length < 4) {
             return result;
         }
-        //先排序
+        // 先排序
         Arrays.sort(nums);
         if (nums[0] > 0 || nums[nums.length - 1] < 0) {
             return result;
         }
-        //只能少一层循环
+        // 只能少一层循环
         for (int i = 0; i < nums.length; i++) {
             while (i > 0 && i < nums.length && nums[i] == nums[i - 1]) {
                 i++;
             }
-            //求三数之和
+            // 求三数之和
             for (int j = i + 1; j < nums.length; j++) {
                 while (j > i + 1 && j < nums.length && nums[j] == nums[j - 1]) {
                     j++;
@@ -485,34 +467,48 @@ public class Solution11_20 {
      * @return
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int length = 0;
-        ListNode temp = head;
-        while (temp.next != null) {
-            length++;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode temp = dummy;
+        // 求出链表长度
+        int length = -1;
+        while (temp != null) {
             temp = temp.next;
+            length++;
         }
-        //需要判断删除的节点是否是尾结点
-        //
-        temp = head;
+        // 删除第length-n节点
+        temp = dummy;
         for (int i = 0; i < length - n; i++) {
             temp = temp.next;
         }
-
-        return null;
+        temp.next = temp.next.next;
+        return dummy.next;
     }
 
+    /**
+     * 20. 有效的括号 https://leetcode-cn.com/problems/valid-parentheses/
+     * 
+     * @param s
+     * @return
+     */
+    public boolean isValid(String s) {
+        LinkedList stack = new LinkedList<>(Arrays.asList(s.toCharArray()));
+        return false;
+    }
 
     public static void main(String[] args) {
         Solution11_20 solution = new Solution11_20();
-//        int[] nums = {1, 0, -1, 0, -2, 2};//[[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
-//        int[] nums = {0,0,0,0}; //0 //{0,0,0,0}
-//        int[] nums = {-3, -1, 0, 2, 4, 5}; //0 //[[-3,-1,0,4]]
-//        int[] nums = {-2, -1, -1, 1, 1, 2, 2}; //0 //[[-2,-1,1,2],[-1,-1,1,1]]
-//        int[] nums = {-3, -1, 0, 2, 4, 5}; //2 //[[-3,-1,2,4]]
-//        int[] nums = {-1, 0, 1, 2, -1, -4}; //-1 //[[-4,0,1,2],[-1,-1,0,1]]
-//        int[] nums = {-1, -5, -5, -3, 2, 5, 0, 4}; //-7 //[[-5,-5,-1,4],[-5,-3,-1,2],[-5,-3,-1,2]]
-//        int[] nums = {-4, 0, -4, 2, 2, 2, -2, -2};//8
-        int[] nums = {-1, 2, 2, -5, 0, -1, 4};//3//[[-5,2,2,4],[-1,0,2,2]]
+        // int[] nums = {1, 0, -1, 0, -2, 2};//[[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0,
+        // 0, 1]]
+        // int[] nums = {0,0,0,0}; //0 //{0,0,0,0}
+        // int[] nums = {-3, -1, 0, 2, 4, 5}; //0 //[[-3,-1,0,4]]
+        // int[] nums = {-2, -1, -1, 1, 1, 2, 2}; //0 //[[-2,-1,1,2],[-1,-1,1,1]]
+        // int[] nums = {-3, -1, 0, 2, 4, 5}; //2 //[[-3,-1,2,4]]
+        // int[] nums = {-1, 0, 1, 2, -1, -4}; //-1 //[[-4,0,1,2],[-1,-1,0,1]]
+        // int[] nums = {-1, -5, -5, -3, 2, 5, 0, 4}; //-7
+        // //[[-5,-5,-1,4],[-5,-3,-1,2],[-5,-3,-1,2]]
+        // int[] nums = {-4, 0, -4, 2, 2, 2, -2, -2};//8
+        int[] nums = { -1, 2, 2, -5, 0, -1, 4 };// 3//[[-5,2,2,4],[-1,0,2,2]]
         var result = solution.fourSum(nums, 3);
         System.out.println(result);
     }
