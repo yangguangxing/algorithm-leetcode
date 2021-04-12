@@ -2,6 +2,7 @@ package com.leetcode.no1_100;
 
 import com.leetcode.ListNode;
 
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -467,6 +468,9 @@ public class Solution11_20 {
      * @return
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (n < 1) {
+            return head;
+        }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode temp = dummy;
@@ -485,31 +489,46 @@ public class Solution11_20 {
         return dummy.next;
     }
 
+    Map<Character, Character> charMap = new HashMap<>();
+
+    {
+        charMap.put('(', ')');
+        charMap.put('{', '}');
+        charMap.put('[', ']');
+    }
+
     /**
      * 20. 有效的括号 https://leetcode-cn.com/problems/valid-parentheses/
-     * 
+     * '('，')'，'{'，'}'，'['，']'
+     *
      * @param s
      * @return
      */
     public boolean isValid(String s) {
-        LinkedList stack = new LinkedList<>(Arrays.asList(s.toCharArray()));
-        return false;
+        LinkedList<Character> chars = new LinkedList<>();
+        for (Character c : s.toCharArray()) {
+            if (charMap.get(c) == null) {
+                // ),},]中的一个,map中查询对比
+                if (!chars.isEmpty() && c.equals(charMap.get(chars.getLast()))) {
+                    chars.removeLast();
+                } else {
+                    return false;
+                }
+            } else {
+                chars.addLast(c);
+            }
+        }
+        return chars.isEmpty();
     }
 
     public static void main(String[] args) {
         Solution11_20 solution = new Solution11_20();
-        // int[] nums = {1, 0, -1, 0, -2, 2};//[[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0,
-        // 0, 1]]
-        // int[] nums = {0,0,0,0}; //0 //{0,0,0,0}
-        // int[] nums = {-3, -1, 0, 2, 4, 5}; //0 //[[-3,-1,0,4]]
-        // int[] nums = {-2, -1, -1, 1, 1, 2, 2}; //0 //[[-2,-1,1,2],[-1,-1,1,1]]
-        // int[] nums = {-3, -1, 0, 2, 4, 5}; //2 //[[-3,-1,2,4]]
-        // int[] nums = {-1, 0, 1, 2, -1, -4}; //-1 //[[-4,0,1,2],[-1,-1,0,1]]
-        // int[] nums = {-1, -5, -5, -3, 2, 5, 0, 4}; //-7
-        // //[[-5,-5,-1,4],[-5,-3,-1,2],[-5,-3,-1,2]]
-        // int[] nums = {-4, 0, -4, 2, 2, 2, -2, -2};//8
-        int[] nums = { -1, 2, 2, -5, 0, -1, 4 };// 3//[[-5,2,2,4],[-1,0,2,2]]
-        var result = solution.fourSum(nums, 3);
+        // ListNode head = ListNode.init(1, 2, 3, 4, 5);
+        // int n = 2; // [1,2,3,5]
+        ListNode head = ListNode.init(1);
+        int n=1; //[]
+
+        var result = solution.removeNthFromEnd(head, n);
         System.out.println(result);
     }
 }
