@@ -13,8 +13,18 @@ public class Solution21_30 {
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         // 输入：l1 = [1,2,4], l2 = [1,3,4],输出：[1,1,2,3,4,4]
-        ListNode dummy = new ListNode(0);
-        
+        ListNode dummy = new ListNode(0), temp = dummy;
+        ListNode temp1 = l1, temp2 = l2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val < temp2.val) {
+                temp.next = new ListNode(temp1.val);
+                temp1 = temp1.next;
+            } else {
+                temp.next = new ListNode(temp2.val);
+                temp2 = temp2.next;
+            }
+            temp = temp.next;
+        }
         return dummy.next;
     }
 
