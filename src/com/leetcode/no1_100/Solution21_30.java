@@ -2,9 +2,7 @@ package com.leetcode.no1_100;
 
 import com.leetcode.ListNode;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Solution21_30 {
 
@@ -65,6 +63,22 @@ public class Solution21_30 {
         parenthesis(left, right + 1, count, result, str + ")");
     }
 
+    private static char[] chars = new char[]{'a', 'b', 'c', 'd'};
+
+
+    private void combination(String s, int count) {
+        if (count == 0) {
+            System.out.println(s);
+            return;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (!s.contains(chars[i] + "")) {
+                String str = s + chars[i];
+                combination(str, count - 1);
+            }
+        }
+    }
+
     /**
      * 23. 合并K个升序链表
      * 输入：lists = [[1,4,5],[1,3,4],[2,6]]
@@ -84,7 +98,7 @@ public class Solution21_30 {
 
     public static void main(String[] args) {
         Solution21_30 solution = new Solution21_30();
-        var result = solution.mergeKLists(null);
-        System.out.println(result);
+        solution.combination("", 4);
+//        System.out.println(result);
     }
 }
