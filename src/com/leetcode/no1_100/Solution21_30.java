@@ -91,14 +91,29 @@ public class Solution21_30 {
         if (lists == null) {
             return null;
         }
+        if (lists.length == 1) {
+            return lists[0];
+        }
         ListNode result = null;
         int length = lists.length;
         return result;
     }
 
-    public static void main(String[] args) {
-        Solution21_30 solution = new Solution21_30();
-        solution.combination("", 4);
+    public static void main(String[] args) throws Exception {
+//        Solution21_30 solution = new Solution21_30();
+//        solution.combination("", 4);
 //        System.out.println(result);
+        for (int i = 0; i < 4; i++) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+        Thread.sleep(1000);
+        int count = Runtime.getRuntime().availableProcessors();
+        System.out.println(count);
     }
 }
